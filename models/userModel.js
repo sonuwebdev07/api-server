@@ -4,35 +4,35 @@ const userSchema = new mongoose.Schema({
     first_name: {
         type: String,
         required: [true, 'Please add First Name !!'],
-        trim: true,
+        trim: true
     },
     last_name: {
         type: String,
         required: [true, 'Please add Last Name !!'],
-        trim: true,
+        trim: true
     },
     email: {
         type: String,
         required: [true, 'Please add Email !!'],
         unique: true,
-        trim: true,
+        trim: true
     },
     mobile: {
         type: String,
         required: [true, 'Please add Mobile !!'],
         unique: true,
-        trim: true,
+        trim: true
     },
     password: {
         type: String,
         required: [true, 'Please add Password !!'],
         trim: true,
         min: 6,
-        max: 64,
+        max: 64
     },
     address: {
         type: String,
-        required: [true, 'Please add Address !!'],
+        required: [true, 'Please add Address !!']
     }
 }, { timestamps: true });
 

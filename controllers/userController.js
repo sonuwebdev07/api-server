@@ -68,7 +68,6 @@ const registerController = async (req, res) => {
 
         //Insert User to Database
         const user = await userModel({ first_name, last_name, email, mobile, password: hashedPassword, address }).save();
-
         return res.status(201).send({
             success: true,
             message: 'Registration Successfull Please Login..'
@@ -116,7 +115,7 @@ const loginController = async (req, res) => {
         }
 
         //TOKEN JWT
-        const token = await JWT.sign({ _id: findUser._id }, process.env.JWT_SECRET, { expiresIn: "7d", });
+        const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d", });
 
         //undefind Password
         user.password = undefined;
@@ -125,14 +124,14 @@ const loginController = async (req, res) => {
             success: true,
             message: 'Login Successfull...',
             token,
-            user,
+            user
         })
     } catch (error) {
         console.log(error);
         return res.status(500).send({
             success: false,
             message: 'Error in Login !!! ',
-            error: error,
+            error: error
         })
     }
 
@@ -146,14 +145,14 @@ const getUserController = async (req, res) => {
         res.status(201).send({
             success: true,
             message: 'Data Get Successfully',
-            user,
+            user
         })
     } catch (error) {
         console.log(error);
         return res.status(500).send({
             success: false,
             message: 'Error in User Get API !!! ',
-            error,
+            error
         })
 
     }
@@ -184,7 +183,7 @@ const updateUserController = async (req, res) => {
             last_name: last_name || user.last_name,
             email: email || user.email,
             mobile: mobile || user.mobile,
-            password: hashedPassword || findUser.password,
+            password: hashedPassword || user.password,
             address: address || user.address
 
         }, { new: true });
